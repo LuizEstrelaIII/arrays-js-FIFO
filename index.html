@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fila</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .queue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .queue-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>fila</h1>
+  <div class="queue" id="queue"></div>
+  <button onclick="enqueue()">add bola </button>
+</div>
+
+<script>
+  const queue = [];
+
+  function enqueue() {
+    const color = getRandomColor();
+    queue.push(color);
+    renderQueue();
+  }
+
+  function renderQueue() {
+    const queueElement = document.getElementById('queue');
+    queueElement.innerHTML = '';
+    queue.forEach(color => {
+      const div = document.createElement('div');
+      div.classList.add('queue-item');
+      div.style.backgroundColor = color;
+      queueElement.appendChild(div);
+    });
+  }
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+</script>
+</body>
+</html>
